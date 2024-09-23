@@ -1,7 +1,5 @@
 # Starter with Vite, React Testing Library and Vitest
 
-Created for the Udemy course [React Testing Library with Jest / Vitest](https://www.udemy.com/course/react-testing-library)
-
 ## How this project was created
 
 This project was created using this command:
