@@ -1,10 +1,22 @@
+import './App.css';
+import React, { useState } from 'react';
+
 function App() {
-  return (
-    <div>
-      <h1>Painter App!</h1>
-      <button className="red">Change Color to Blue</button>
-    </div>
-  );
+	const [btnColor, setBtnColor] = useState('red');
+	const nextBtnColor = btnColor === 'red' ? 'blue' : 'red';
+
+	const changeBtnColor = () => {
+		setBtnColor(nextBtnColor);
+	};
+
+	return (
+		<div>
+			<h1>Painter App!</h1>
+			<button className={btnColor} onClick={changeBtnColor}>
+				Change Color to {nextBtnColor}
+			</button>
+		</div>
+	);
 }
 
 export default App;
