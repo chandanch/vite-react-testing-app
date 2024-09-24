@@ -103,4 +103,10 @@ test('button color must be gray when disabled', () => {
 	fireEvent.click(checkboxElement);
 
 	expect(buttonElement).toHaveClass('gray');
+
+	fireEvent.click(checkboxElement);
+
+	fireEvent.click(buttonElement);
+
+	expect(buttonElement).toHaveClass('blue');
 });
