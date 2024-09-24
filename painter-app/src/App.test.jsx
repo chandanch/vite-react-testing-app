@@ -44,3 +44,10 @@ test('button text is changed on btn click', () => {
 	// 2. check the btn color after click - must be blue
 	expect(buttonElement).toHaveTextContent(/red/i);
 });
+
+test('should contain app title', () => {
+	render(<App />);
+
+	const headingElement = screen.getByRole('heading');
+	expect(headingElement).toHaveTextContent('Painter App!');
+});
