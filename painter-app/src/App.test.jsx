@@ -64,7 +64,7 @@ test('color button must be disabled and checkbox must be unchecked by default', 
 	expect(checkboxElement).not.toBeChecked();
 });
 
-test('color must button toggle based on checkbox state', () => {
+test('color button must toggle based on checkbox state', () => {
 	render(<App />);
 
 	const buttonElement = screen.getByRole('button', { name: /blue/i });
@@ -89,4 +89,18 @@ test('color must button toggle based on checkbox state', () => {
 
 	// check if checkbox is checked
 	expect(checkboxElement).not.toBeChecked();
+});
+
+test('button color must be gray when disabled', () => {
+	render(<App />);
+
+	const buttonElement = screen.getByRole('button', { name: /blue/i });
+	const checkboxElement = screen.getByRole('checkbox', {
+		name: /disable color/i,
+	});
+
+	// 1. check the checkbox
+	fireEvent.click(checkboxElement);
+
+	expect(buttonElement).toHaveClass('gray');
 });

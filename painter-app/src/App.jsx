@@ -18,7 +18,7 @@ function App() {
 		<div>
 			<h1>Painter App!</h1>
 			<button
-				className={btnColor}
+				className={isColorBtnDisabled ? 'gray' : btnColor}
 				onClick={changeBtnColor}
 				disabled={isColorBtnDisabled}
 			>
