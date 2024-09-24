@@ -51,3 +51,42 @@ test('should contain app title', () => {
 	const headingElement = screen.getByRole('heading');
 	expect(headingElement).toHaveTextContent('Painter App!');
 });
+
+test('color button must be disabled and checkbox must be unchecked by default', () => {
+	render(<App />);
+
+	const buttonElement = screen.getByRole('button', { name: /blue/i });
+	const checkboxElement = screen.getByRole('checkbox', {
+		name: /disable color/i,
+	});
+
+	expect(buttonElement).toBeEnabled();
+	expect(checkboxElement).not.toBeChecked();
+});
+
+test('color must button toggle based on checkbox state', () => {
+	render(<App />);
+
+	const buttonElement = screen.getByRole('button', { name: /blue/i });
+	const checkboxElement = screen.getByRole('checkbox', {
+		name: /disable color/i,
+	});
+
+	// 1. check the checkbox
+	fireEvent.click(checkboxElement);
+
+	// check if btn is disabled
+	expect(buttonElement).toBeDisabled();
+
+	// check if checkbox is checked
+	expect(checkboxElement).toBeChecked();
+
+	// uncheck the checkbox
+	fireEvent.click(checkboxElement);
+
+	// check if btn is disabled
+	expect(buttonElement).toBeEnabled();
+
+	// check if checkbox is checked
+	expect(checkboxElement).not.toBeChecked();
+});
