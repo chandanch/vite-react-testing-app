@@ -1,9 +1,11 @@
 import './App.css';
 import React, { useState } from 'react';
+import { kebabCaseToTitleCase } from './helpers/textTransformer';
 
 function App() {
-	const [btnColor, setBtnColor] = useState('red');
-	const nextBtnColor = btnColor === 'red' ? 'blue' : 'red';
+	const [btnColor, setBtnColor] = useState('medium-violet-red');
+	const nextBtnColor =
+		btnColor === 'medium-violet-red' ? 'midnight-blue' : 'medium-violet-red';
 	const [isColorBtnDisabled, setColorBtnState] = useState(false);
 
 	const changeBtnColor = () => {
@@ -22,7 +24,7 @@ function App() {
 				onClick={changeBtnColor}
 				disabled={isColorBtnDisabled}
 			>
-				Change Color to {nextBtnColor}
+				Change Color to {kebabCaseToTitleCase(nextBtnColor)}
 			</button>
 			<input
 				type="checkbox"
