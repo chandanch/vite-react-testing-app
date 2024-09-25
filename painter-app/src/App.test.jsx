@@ -44,3 +44,69 @@ test('button text is changed on btn click', () => {
 	// 2. check the btn color after click - must be blue
 	expect(buttonElement).toHaveTextContent(/red/i);
 });
+
+test('should contain app title', () => {
+	render(<App />);
+
+	const headingElement = screen.getByRole('heading');
+	expect(headingElement).toHaveTextContent('Painter App!');
+});
+
+test('color button must be disabled and checkbox must be unchecked by default', () => {
+	render(<App />);
+
+	const buttonElement = screen.getByRole('button', { name: /blue/i });
+	const checkboxElement = screen.getByRole('checkbox', {
+		name: /disable color/i,
+	});
+
+	expect(buttonElement).toBeEnabled();
+	expect(checkboxElement).not.toBeChecked();
+});
+
+test('color button must toggle based on checkbox state', () => {
+	render(<App />);
+
+	const buttonElement = screen.getByRole('button', { name: /blue/i });
+	const checkboxElement = screen.getByRole('checkbox', {
+		name: /disable color/i,
+	});
+
+	// 1. check the checkbox
+	fireEvent.click(checkboxElement);
+
+	// check if btn is disabled
+	expect(buttonElement).toBeDisabled();
+
+	// check if checkbox is checked
+	expect(checkboxElement).toBeChecked();
+
+	// uncheck the checkbox
+	fireEvent.click(checkboxElement);
+
+	// check if btn is disabled
+	expect(buttonElement).toBeEnabled();
+
+	// check if checkbox is checked
+	expect(checkboxElement).not.toBeChecked();
+});
+
+test('button color must be gray when disabled', () => {
+	render(<App />);
+
+	const buttonElement = screen.getByRole('button', { name: /blue/i });
+	const checkboxElement = screen.getByRole('checkbox', {
+		name: /disable color/i,
+	});
+
+	// 1. check the checkbox
+	fireEvent.click(checkboxElement);
+
+	expect(buttonElement).toHaveClass('gray');
+
+	fireEvent.click(checkboxElement);
+
+	fireEvent.click(buttonElement);
+
+	expect(buttonElement).toHaveClass('blue');
+});

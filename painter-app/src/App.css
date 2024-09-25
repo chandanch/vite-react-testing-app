@@ -5,3 +5,10 @@
 .blue {
 	background-color: blue;
 }
+
+.grey {
+	background-color: gray;
+	border: 2px solid black;
+	color: gold;
+	cursor: not-allowed;
+}
