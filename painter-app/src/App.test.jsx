@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import App from './App';
 import { expect, test } from 'vitest';
+import { kebabCaseToTitleCase } from './helpers/textTransformer';
 
 test('button has a default color', () => {
 	render(<App />);
@@ -109,4 +110,24 @@ test('button color must be gray when disabled', () => {
 	fireEvent.click(buttonElement);
 
 	expect(buttonElement).toHaveClass('blue');
+});
+
+describe('Test Text Transformer', () => {
+	test('with no hypens', () => {
+		const testText = kebabCaseToTitleCase('red');
+
+		expect(testText).toBe('Red');
+	});
+
+	test('with one hypens', () => {
+		const testText = kebabCaseToTitleCase('red-green');
+
+		expect(testText).toBe('Red Green');
+	});
+
+	test('with one hypens', () => {
+		const testText = kebabCaseToTitleCase('red-green-blue');
+
+		expect(testText).toBe('Red Green Blue');
+	});
 });
