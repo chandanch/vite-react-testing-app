@@ -33,4 +33,14 @@ describe('Order Summary: Summary Form Test', () => {
 
 		expect(buttonElement).toBeDisabled();
 	});
+
+	test('popover should not be present by default', async () => {
+		render(<SummaryForm />);
+
+		const nullPopover = screen.queryByText(
+			/ no icecream will actually be delivered/i
+		);
+
+		expect(nullPopover).not.toBeInTheDocument();
+	});
 });
