@@ -27,5 +27,10 @@ describe('Order Summary: Summary Form Test', () => {
 		const buttonElement = screen.getByRole('button', { name: /confirm/i });
 
 		expect(buttonElement).toBeEnabled();
+
+		// uncheck checkbox
+		await user.click(checkboxElement);
+
+		expect(buttonElement).toBeDisabled();
 	});
 });
