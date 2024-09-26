@@ -1,6 +1,6 @@
 // import React from 'react';
 
-function OrderSummary() {
+function SummaryForm() {
 	return (
 		<div>
 			<h1>Order Summary</h1>
@@ -8,4 +8,4 @@ function OrderSummary() {
 	);
 }
 
-export default OrderSummary;
+export default SummaryForm;
