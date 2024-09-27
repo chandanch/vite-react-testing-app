@@ -33,4 +33,49 @@ describe('Order Summary: Summary Form Test', () => {
 
 		expect(buttonElement).toBeDisabled();
 	});
+
+	test('popover should not be present by default', async () => {
+		render(<SummaryForm />);
+
+		const nullPopover = screen.queryByText(
+			/ no icecream will actually be delivered/i
+		);
+
+		expect(nullPopover).not.toBeInTheDocument();
+	});
+
+	test('popover must be shown on hover', async () => {
+		const user = userEvent.setup();
+
+		render(<SummaryForm />);
+
+		const tcElement = screen.queryByText(/Terms and Conditions/i);
+
+		await user.hover(tcElement);
+
+		const popoverElement = screen.queryByText(
+			/No ice cream will actually be delivered/i
+		);
+
+		expect(popoverElement).toBeInTheDocument();
+	});
+
+	test('popover must be removed when unhovered', async () => {
+		const user = userEvent.setup();
+
+		render(<SummaryForm />);
+
+		const tcElement = screen.queryByText(/terms and Conditions/i);
+		await user.hover(tcElement);
+
+		const popoverElement = screen.queryByText(
+			/No ice cream will actually be delivered/i
+		);
+
+		expect(popoverElement).toBeInTheDocument();
+
+		// unhover case
+		await user.unhover(tcElement);
+		expect(popoverElement).not.toBeInTheDocument();
+	});
 });
