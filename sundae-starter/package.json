@@ -1,8 +1,9 @@
 {
-  "name": "color-button",
+  "name": "Sundae Starter",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "author": "chandanch",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
