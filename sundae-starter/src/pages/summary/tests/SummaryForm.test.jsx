@@ -78,4 +78,12 @@ describe('Order Summary: Summary Form Test', () => {
 		await user.unhover(tcElement);
 		expect(popoverElement).not.toBeInTheDocument();
 	});
+
+	test('terms and conditions text must be present by default', async () => {
+		render(<SummaryForm />);
+
+		const tcElement = screen.queryByText(/Terms and Conditions/i);
+
+		expect(tcElement).toBeInTheDocument();
+	});
 });
