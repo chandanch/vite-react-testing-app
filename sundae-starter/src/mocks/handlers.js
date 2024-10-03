@@ -15,4 +15,22 @@ export const handlers = [
 			},
 		]);
 	}),
+
+	http.get('http://localhost:3030/toppings', () => {
+		// ...and respond to them using this JSON response.
+		return HttpResponse.json([
+			{
+				name: 'Cherries',
+				imagePath: 'images/cherries.png',
+			},
+			{
+				name: 'Hot Fudge',
+				imagePath: 'images/hot-fudge.png',
+			},
+			{
+				name: 'M&Ms',
+				imagePath: 'images/m-and-ms.png',
+			},
+		]);
+	}),
 ];
