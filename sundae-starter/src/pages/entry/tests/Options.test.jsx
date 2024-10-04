@@ -24,6 +24,10 @@ describe('Options test', () => {
 
 		// check if alt text exists
 		const altTexts = toppingImages.map((scoopImage) => scoopImage.alt);
-		expect(altTexts).toEqual(['Cherries', 'Hot Fudge', 'M&Ms']);
+		expect(altTexts).toEqual([
+			'Cherries topping',
+			'Hot Fudge topping',
+			'M&Ms topping',
+		]);
 	});
 });
