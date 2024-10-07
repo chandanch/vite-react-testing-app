@@ -20,7 +20,7 @@ describe('Order Entry tests', () => {
 		render(<OrderEntry />);
 
 		const alertElements = await screen.findAllByRole('alert', {
-			name: /An unexpected error occured$/i,
+			name: /An unexpected error occurred. Please try again later.$/i,
 		});
 
 		expect(alertElements).toHaveLength(2);
