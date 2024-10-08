@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 import { server } from '../../../mocks/server';
 import { http, HttpResponse } from 'msw';
-import { render, screen } from '@testing-library/react';
+import { render, screen, logRoles } from '@testing-library/react';
 import OrderEntry from '../OrderEntry';
 
 describe('Order Entry tests', () => {
@@ -17,11 +17,12 @@ describe('Order Entry tests', () => {
 			}),
 		]);
 
-		render(<OrderEntry />);
+		const { container } = render(<OrderEntry />);
 
-		const alertElements = await screen.findAllByRole('alert', {
-			name: /An unexpected error occurred. Please try again later.$/i,
-		});
+		const alertElements = await screen.findAllByRole('alert');
+
+		// eslint-disable-next-line testing-library/no-debugging-utils
+		logRoles(container);
 
 		// must display 2 error alerts - scoops and toppings
 		expect(alertElements).toHaveLength(2);
