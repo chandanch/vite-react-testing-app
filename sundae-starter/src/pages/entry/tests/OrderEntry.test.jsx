@@ -23,6 +23,7 @@ describe('Order Entry tests', () => {
 			name: /An unexpected error occurred. Please try again later.$/i,
 		});
 
+		// must display 2 error alerts - scoops and toppings
 		expect(alertElements).toHaveLength(2);
 	});
 });
