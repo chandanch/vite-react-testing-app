@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { describe, expect } from 'vitest';
 import Options from '../Options';
 import userEvent from '@testing-library/user-event';
+import { OrderDetailsProvider } from '../../../contexts/OrderDetails';
 
 describe('total update tests', () => {
 	test('scoops sub total must have a default value', () => {
@@ -17,7 +18,7 @@ describe('total update tests', () => {
 	test('scoop subtotal must be updated when scoops are added', async () => {
 		const user = userEvent.setup();
 
-		render(<Options optionType="scoops" />);
+		render(<Options optionType="scoops" />, { wrapper: OrderDetailsProvider });
 
 		const scoopInputElement = await screen.findByRole('spinbutton', {
 			name: 'Vanilla',
