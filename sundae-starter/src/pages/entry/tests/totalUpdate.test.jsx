@@ -40,4 +40,34 @@ describe('total update tests', () => {
 
 		expect(scoopsSubTotal).toHaveTextContent('6.00');
 	});
+
+	test('toppings sub total must have a default value', () => {
+		render(<Options optionType="toppings" />);
+
+		const toppingsSubTotal = screen.getByText('Toppings total: $', {
+			exact: false,
+		});
+
+		expect(toppingsSubTotal).toHaveTextContent('0.00');
+	});
+
+	test('toppings subtotal must be updated when toppings are added or removed', async () => {
+		const user = userEvent.setup();
+
+		render(<Options optionType="toppings" />);
+
+		const cherriesOptionElement = await screen.findByRole('spinbutton', {
+			name: 'Cherries',
+		});
+
+		await user.clear(cherriesOptionElement);
+		await user.click(cherriesOptionElement);
+		const toppingsSubTotal = screen.getByText('Toppings total: $', {
+			exact: false,
+		});
+		expect(toppingsSubTotal).toHaveTextContent('1.50');
+
+		await user.click(cherriesOptionElement);
+		expect(toppingsSubTotal).toHaveTextContent('0.00');
+	});
 });
