@@ -1,4 +1,4 @@
-import { http, HttpResponse } from 'msw';
+import { delay, http, HttpResponse } from 'msw';
 
 export const handlers = [
 	// Intercept "GET request...
@@ -32,5 +32,16 @@ export const handlers = [
 				imagePath: 'images/m-and-ms.png',
 			},
 		]);
+	}),
+
+	http.post('http://localhost:3030/order', () => {
+		delay(1000);
+
+		return HttpResponse(
+			{ id: 1232 },
+			{
+				status: 201,
+			}
+		);
 	}),
 ];
