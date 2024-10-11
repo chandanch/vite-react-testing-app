@@ -57,7 +57,7 @@ describe('total update tests', () => {
 
 		render(<Options optionType="toppings" />);
 
-		const cherriesOptionElement = await screen.findByRole('spinbutton', {
+		const cherriesOptionElement = await screen.findByRole('checkbox', {
 			name: 'Cherries',
 		});
 
