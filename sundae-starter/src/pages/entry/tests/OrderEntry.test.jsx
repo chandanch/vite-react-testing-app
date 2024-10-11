@@ -1,7 +1,11 @@
 import { describe, expect, test } from 'vitest';
 import { server } from '../../../mocks/server';
 import { http, HttpResponse } from 'msw';
-import { render, screen, logRoles } from '@testing-library/react';
+import {
+	render,
+	screen,
+	logRoles,
+} from '../../../test-utils/testing-library-utils';
 import OrderEntry from '../OrderEntry';
 
 describe('Order Entry tests', () => {
