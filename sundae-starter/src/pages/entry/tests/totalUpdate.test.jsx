@@ -3,6 +3,7 @@ import { describe, expect } from 'vitest';
 import Options from '../Options';
 import userEvent from '@testing-library/user-event';
 import { OrderDetailsProvider } from '../../../contexts/OrderDetails';
+import OrderEntry from '../OrderEntry';
 
 describe('total update tests', () => {
 	test('scoops sub total must have a default value', () => {
@@ -69,5 +70,36 @@ describe('total update tests', () => {
 
 		await user.click(cherriesOptionElement);
 		expect(toppingsSubTotal).toHaveTextContent('0.00');
+	});
+});
+
+describe('grand total tests', () => {
+	test('grand total must be 0 by default', () => {
+		render(<OrderEntry />);
+
+		const grandTotalElement = screen.getByText('Grand Total', { exact: false });
+		expect(grandTotalElement).toHaveTextContent('0.00');
+	});
+
+	test('grand total must be updated based on toppings or scoops selection', async () => {
+		const user = userEvent.setup();
+
+		render(<OrderEntry />);
+
+		const grandTotalElement = screen.getByText('Grand Total', { exact: false });
+		const cherriesOptionElement = await screen.findByRole('spinbutton', {
+			name: 'Cherries',
+		});
+
+		await user.clear(cherriesOptionElement);
+		await user.click(cherriesOptionElement);
+
+		const chocoscoopInputElement = await screen.findByRole('spinbutton', {
+			name: 'Chocolate',
+		});
+		await user.clear(chocoscoopInputElement);
+		await user.type(chocoscoopInputElement, '2');
+
+		expect(grandTotalElement).toHaveTextContent('5.50');
 	});
 });
